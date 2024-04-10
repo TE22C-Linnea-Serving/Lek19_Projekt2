@@ -25,13 +25,22 @@ public class App {
 
         int svar = tangentbord.nextInt();
 
-        if(svar==1)                         //Boka plats
-        {
+        if(svar==1){                                    //Boka plats
             String X = tangentbord.nextLine();          //tar bort enter
             System.out.println("Ange namn:");
             String namn = tangentbord.nextLine();
-            System.out.println(namn);
-        }else if(svar==2)                   //Avboka plats
+            System.out.println("Vilken plats");
+            
+            char[] chars = namn.toCharArray();
+            for(int i =0 ; i<chars.length;i++){
+               if(Character.isDigit(chars[i] )){
+                  // Nu har vi hittat en siffra jippie
+                  System.out.println("Du skrev ett ogiltigt namn. Försök igen");        //FORTSÄTT
+                  break; 
+               }
+            }
+
+        }else if(svar==2)                               //Avboka plats
         {
 
         }else if(svar==3)                   //Beräkna vinst
