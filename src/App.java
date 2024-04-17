@@ -27,35 +27,39 @@ public class App {
                 laddar();
                 String X1 = tangentbord.nextLine(); // tar bort enter
                 System.out.println("Välj:\n1. Ange namn\n2. Ange personnummer");
+
                 int val1 = tangentbord.nextInt();
                 if (val1 == 1) {
                     System.out.println("Ange namn:");
                     String X2 = tangentbord.nextLine(); // tar bort enter
                     String namn = tangentbord.nextLine();
-                    laddar();
 
-                    char[] chars = namn.toCharArray();
-                    for (int i = 0; i < chars.length; i++) {
-                        if (Character.isAlphabetic(chars[i])) {
+                    int giltigtNamn = 0;
+                    while (giltigtNamn == 0) {
 
-                        } else {
-                            System.out.println("Du skrev ett ogiltigt namn. Försök igen");
-                            namn = tangentbord.nextLine();
-                            break;
+                        char[] chars = namn.toCharArray();
+                        for (int i = 0; i < chars.length; i++) {
+                            if (Character.isAlphabetic(chars[i])) {
+                                String namn1 = namn;
+                                giltigtNamn = 1;
+                                
+                            } else {
+                                System.out.println("Du skrev ett ogiltigt namn. Försök igen");
+                                namn = tangentbord.nextLine();
+                                break;
+                            }
                         }
                     }
                 } else if (val1 == 2) {
-                    System.out.println("Ange personnummer");
+                    System.out.println("Ange personnummer (ÅÅÅÅMMDD):");
                     int personnummer = tangentbord.nextInt();
-                    System.out.println(personnummer);
-
                 }
 
                 int antalPlatser = 0;
                 int[] platser = new int[19];
                 platser[3] = 7;
                 for (int i = 0; i > platser.length; i++) {
-                    if ( platser[i] != 0) {
+                    if (platser[i] != 0) {
                         antalPlatser++;
                         // Fungerar inte
                     }
