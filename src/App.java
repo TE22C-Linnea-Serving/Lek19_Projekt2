@@ -12,73 +12,48 @@ public class App {
         System.out.println("\n");
     }
 
+    public static void bokaPlats() throws InterruptedException {
+        Scanner tangentbord = new Scanner(System.in);
+        laddar();
+        System.out.println("Välj:\n1. Ange namn\n2. Ange personnummer");
+
+        int val1 = tangentbord.nextInt();
+        if (val1 == 1) {
+            System.out.println("Ange namn:");
+            String X2 = tangentbord.nextLine(); // tar bort enter
+            String namn = tangentbord.nextLine();
+
+            if (!namn.matches("[a-zA-Z]+")) {
+                System.out.println("Ogiltigt namn");
+                return;
+            }
+            System.out.println("[1] [2][ ][3] [4]\n[5] [6][ ][7] [8]\n [9][10][ ][11][12]\n[13][14][ ][15][16]\n[17][18][ ][19][20]");
+
+            String[] namnPlats;
+
+        } else if (val1 == 2) {
+            System.out.println("Ange personnummer (YYYYMMDD):");
+            int personnummer = tangentbord.nextInt();
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         Scanner tangentbord = new Scanner(System.in);
-
-        boolean x = true;
-        while (x == true) {
+        while (true) {
             laddar();
-            System.out.println(
-                    "Meny:\n1. Boka plats\n2. Avboka plats\n3. Bokade platser\n4. Beräkna vinster\n5. Avsluta\n");
-
+            System.out.println("Meny:\n1. Boka plats\n2. Avboka plats\n3. Bokade platser\n4. Beräkna vinster\n5. Avsluta\n");
             int svar = tangentbord.nextInt();
+            if (svar == 1) {
+                bokaPlats();
+            }else if(svar == 2){
 
-            if (svar == 1) { // Boka plats
+            }else if(svar == 3){
+
+            }else if(svar == 4){
+
+            }else if(svar == 5){
                 laddar();
-                String X1 = tangentbord.nextLine(); // tar bort enter
-                System.out.println("Välj:\n1. Ange namn\n2. Ange personnummer");
-
-                int val1 = tangentbord.nextInt();
-                if (val1 == 1) {
-                    System.out.println("Ange namn:");
-                    String X2 = tangentbord.nextLine(); // tar bort enter
-                    String namn = tangentbord.nextLine();
-
-                    int giltigtNamn = 0;
-                    while (giltigtNamn == 0) {
-
-                        char[] chars = namn.toCharArray();
-                        for (int i = 0; i < chars.length; i++) {
-                            if (Character.isAlphabetic(chars[i])) {
-                                String namn1 = namn;
-                                giltigtNamn = 1;
-                                
-                            } else {
-                                System.out.println("Du skrev ett ogiltigt namn. Försök igen");
-                                namn = tangentbord.nextLine();
-                                break;
-                            }
-                        }
-                    }
-                } else if (val1 == 2) {
-                    System.out.println("Ange personnummer (ÅÅÅÅMMDD):");
-                    int personnummer = tangentbord.nextInt();
-                }
-
-                int antalPlatser = 0;
-                int[] platser = new int[19];
-                platser[3] = 7;
-                for (int i = 0; i > platser.length; i++) {
-                    if (platser[i] != 0) {
-                        antalPlatser++;
-                        // Fungerar inte
-                    }
-                    System.out.println("Just nu finns det " + antalPlatser + " bokade platser");
-                }
-
-            } else if (svar == 2) // Avboka plats
-            {
-
-            } else if (svar == 3) // Bokade platser
-            {
-
-            } else if (svar == 4) // Bärkana vinst
-            {
-            } else if (svar == 5) { // Avsluta
-                laddar();
-                x = false;
-            } else {
-                System.out.println("Du angav ett fel svar. Vänligen välj bland alternativen");
+                break;
             }
         }
     }
