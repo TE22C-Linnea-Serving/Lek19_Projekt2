@@ -27,9 +27,23 @@ public class App {
                 System.out.println("Ogiltigt namn");
                 return;
             }
-            System.out.println("[1] [2][ ][3] [4]\n[5] [6][ ][7] [8]\n [9][10][ ][11][12]\n[13][14][ ][15][16]\n[17][18][ ][19][20]");
 
-            String[] namnPlats;
+            String[] plats= new String[19];
+            System.out.println("[ 1][2 ][ ][ 3][4 ]\n[ 5][6 ][ ][ 7][8 ]\n[ 9][10][ ][11][12]\n[13][14][ ][15][16]\n[17][18][ ][19][20]");
+
+            String[] namnPlats = new String[19];
+            int bokarPlats = tangentbord.nextInt();
+
+            bokarPlats-=1;                          //den platsen som användaren vill boka
+            namnPlats[bokarPlats] = namn;           //namnPlats = namnet som tillhör platsen
+            plats[bokarPlats] = "X";
+            
+
+
+
+
+
+
 
         } else if (val1 == 2) {
             System.out.println("Ange personnummer (YYYYMMDD):");
