@@ -37,51 +37,62 @@ public class App {
                         + "][ ][" + plats[18] + "][" + plats[19] + "]");
 
                 int valPlats = tangentbord.nextInt();
-                // Lägg till om vald plats är upptagen
+                // Om man väljer en upptagen plats ska man välja igen
+
+                valPlats -= 1;
 
                 System.out.println("Välj:\n1. Ange namn\n2. Ange personnummer");
-
                 int val1 = tangentbord.nextInt();
-                if (val1 == 1) {
 
+                if (val1 == 1) {
                     System.out.println("Skriv in ditt namn:");
                     String enter = tangentbord.nextLine();
                     String namn = tangentbord.nextLine();
-                    namnPlats[valPlats] = namn;
-                    valPlats-=1;
                     namnPerson[valPlats] = namn;
                     plats[valPlats] = "X";
 
                     System.out.println("Skriv in din ålder:");
                     int age = tangentbord.nextInt();
-                    if(age<18){                         //Barn priser
-                        summa+=149.90;
-                    }else if(age>18){                   //Vuxenpriser
-                        summa+=299.90;
-                    }else{
-                        //När man skiver in en felaktig ålder t.ex X<0
-                    }
+                    if (age < 18) { // Barn priser
+                        summa += 149.90;
+                    } else if (age > 18) { // Vuxenpriser
+                        summa += 299.90;
+                    } // else{
+                      // När man skiver in en felaktig ålder t.ex X<0
+                      // }
 
                     // checkForNumber(namn);
-
-                    // ________________________________
-                } else if (svar == 2) {
-
-                } else if (svar == 3) {
-
-                } else if (svar == 4) {
-
-                } else if (svar == 5) {
-                    laddar();
-                    break;
                 }
+
+            } else if (svar == 2) {
+
+                System.out.println("Vilken plats vill du avboka?");
+
+                System.out.println("[ " + plats[0] + "][" + plats[1] + " ][ ][ " + plats[2] + "][" + plats[3]
+                        + " ]\n[ "
+                        + plats[4] + "][" + plats[5] + " ][ ][ " + plats[6] + "][" + plats[7] + " ]\n[ " + plats[8]
+                        + "][" + plats[9] + "][ ][" + plats[10] + "][" + plats[11] + "]\n[" + plats[12] + "]["
+                        + plats[13] + "][ ][" + plats[14] + "][" + plats[15] + "]\n[" + plats[16] + "][" + plats[17]
+                        + "][ ][" + plats[18] + "][" + plats[19] + "]");
+
+                int avbokaVal = tangentbord.nextInt();
+                // Om man väljer en plats som inte är bokad
+
+                avbokaVal -= 1;
+                if (namnPerson[avbokaVal] != null) {
+                    int avbokaVal1 = avbokaVal + 1;
+                    plats[avbokaVal] = avbokaVal1 + "";
+                }
+
+            } else if (svar == 3) {
+
+            } else if (svar == 4) {
+
+            } else if (svar == 5) {
+                laddar();
+                break;
             }
         }
-    }
-
-    private static String nextLine() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'nextLine'");
     }
 
     // public static String checkForNumber(String namn){
