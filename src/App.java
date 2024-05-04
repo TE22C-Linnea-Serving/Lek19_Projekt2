@@ -13,38 +13,39 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-        String plats[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
-                "18", "19", "20" };
-        String[] namnPlats = new String[19];
-        String namnPerson[] = new String[19];
-        int[] personnummer = new int[19];
-        double summa = 0;
 
         Scanner tangentbord = new Scanner(System.in);
+
+        String plats[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17","18", "19", "20" };
+        String namnPerson[] = new String[19];
+        int[] personnummer = new int[19];
+        int[] age = new int[19];
+        double summa = 0;
+
         while (true) {
             laddar();
-            System.out.println(
-                    "Meny:\n1. Boka plats\n2. Avboka plats\n3. Bokade platser\n4. Beräkna vinster\n5. Avsluta\n");
+            System.out.println("Meny:\n1. Boka plats\n2. Avboka plats\n3. Bokade platser\n4. Beräkna vinster\n5. Avsluta\n");
             int svar = tangentbord.nextInt();
+            
             if (svar == 1) {
-                // ______________________________
                 laddar();
-
-                System.out.println("[ " + plats[0] + "][" + plats[1] + " ][ ][ " + plats[2] + "][" + plats[3] + " ]\n[ "
-                        + plats[4] + "][" + plats[5] + " ][ ][ " + plats[6] + "][" + plats[7] + " ]\n[ " + plats[8]
-                        + "][" + plats[9] + "][ ][" + plats[10] + "][" + plats[11] + "]\n[" + plats[12] + "]["
-                        + plats[13] + "][ ][" + plats[14] + "][" + plats[15] + "]\n[" + plats[16] + "][" + plats[17]
-                        + "][ ][" + plats[18] + "][" + plats[19] + "]");
-
+                
+                System.out.println("[ " + plats[0] + "][" + plats[1] + " ][ ][ " + plats[2] + "][" + plats[3] + " ]\n[ "+ plats[4] + "][" + plats[5] + " ][ ][ " + plats[6] + "][" + plats[7] + " ]\n[ " + plats[8]+ "][" + plats[9] + "][ ][" + plats[10] + "][" + plats[11] + "]\n[" + plats[12] + "]["+ plats[13] + "][ ][" + plats[14] + "][" + plats[15] + "]\n[" + plats[16] + "][" + plats[17]+ "][ ][" + plats[18] + "][" + plats[19] + "]");
                 int valPlats = tangentbord.nextInt();
-                // Om man väljer en upptagen plats ska man välja igen
-
                 valPlats -= 1;
+
+                while(plats[valPlats]=="X"){
+                    System.out.println("Du försökte boka en upptagen plats. Välj en annan plats");
+                    System.out.println("[ " + plats[0] + "][" + plats[1] + " ][ ][ " + plats[2] + "][" + plats[3] + " ]\n[ "+ plats[4] + "][" + plats[5] + " ][ ][ " + plats[6] + "][" + plats[7] + " ]\n[ " + plats[8]+ "][" + plats[9] + "][ ][" + plats[10] + "][" + plats[11] + "]\n[" + plats[12] + "]["+ plats[13] + "][ ][" + plats[14] + "][" + plats[15] + "]\n[" + plats[16] + "][" + plats[17]+ "][ ][" + plats[18] + "][" + plats[19] + "]");
+                    valPlats = tangentbord.nextInt();
+                    valPlats -= 1;
+                }                                                        // Om man väljer en upptagen plats ska man välja igen
 
                 System.out.println("Välj:\n1. Ange namn\n2. Ange personnummer");
                 int val1 = tangentbord.nextInt();
 
                 if (val1 == 1) {
+                    laddar();
                     System.out.println("Skriv in ditt namn:");
                     String enter = tangentbord.nextLine();
                     String namn = tangentbord.nextLine();
@@ -52,10 +53,10 @@ public class App {
                     plats[valPlats] = "X";
 
                     System.out.println("Skriv in din ålder:");
-                    int age = tangentbord.nextInt();
-                    if (age < 18) { // Barn priser
+                    age[valPlats] = tangentbord.nextInt();
+                    if (age[valPlats] < 18) { // Barn priser
                         summa += 149.90;
-                    } else if (age > 18) { // Vuxenpriser
+                    } else if (age[valPlats] >= 18) { // Vuxenpriser
                         summa += 299.90;
                     } // else{
                       // När man skiver in en felaktig ålder t.ex X<0
@@ -65,6 +66,7 @@ public class App {
                 }
 
             } else if (svar == 2) {
+                laddar();
 
                 System.out.println("Vilken plats vill du avboka?");
 
@@ -80,13 +82,29 @@ public class App {
 
                 avbokaVal -= 1;
                 if (namnPerson[avbokaVal] != null) {
+                    // Fråga om namn. Om namn är samma, forstätt. Annars gå tillbaka till början
                     int avbokaVal1 = avbokaVal + 1;
                     plats[avbokaVal] = avbokaVal1 + "";
+
                 }
 
             } else if (svar == 3) {
+                laddar();
+                System.out.println("[ " + plats[0] + "][" + plats[1] + " ][ ][ " + plats[2] + "][" + plats[3]
+                        + " ]\n[ "
+                        + plats[4] + "][" + plats[5] + " ][ ][ " + plats[6] + "][" + plats[7] + " ]\n[ " + plats[8]
+                        + "][" + plats[9] + "][ ][" + plats[10] + "][" + plats[11] + "]\n[" + plats[12] + "]["
+                        + plats[13] + "][ ][" + plats[14] + "][" + plats[15] + "]\n[" + plats[16] + "][" + plats[17]
+                        + "][ ][" + plats[18] + "][" + plats[19] + "]");
+
+                System.out.println("Det finns " + plats.length + "platser");
+                // Gå igenom alla och se vilka som är "null", och skriv ut det.
 
             } else if (svar == 4) {
+                laddar();
+                summa += 0.5; // Avrundar till heltal
+                System.out.println("Den totala vinsen är: " + (int) summa + " kr");
+                summa -= 0.5; // Tillbaka till orginala priset
 
             } else if (svar == 5) {
                 laddar();
