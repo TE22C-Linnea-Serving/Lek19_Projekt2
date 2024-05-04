@@ -17,9 +17,9 @@ public class App {
         Scanner tangentbord = new Scanner(System.in);
 
         String plats[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17","18", "19", "20" };
-        String namnPerson[] = new String[19];
-        int[] personnummer = new int[19];
-        int[] age = new int[19];
+        String namnPerson[] = new String[20];
+        int[] personnummerPerson = new int[20];
+        int[] age = new int[20];
         double summa = 0;
 
         while (true) {
@@ -29,7 +29,7 @@ public class App {
             
             if (svar == 1) {
                 laddar();
-                
+                System.out.println("Välj vilken plats du vill boka:");
                 System.out.println("[ " + plats[0] + "][" + plats[1] + " ][ ][ " + plats[2] + "][" + plats[3] + " ]\n[ "+ plats[4] + "][" + plats[5] + " ][ ][ " + plats[6] + "][" + plats[7] + " ]\n[ " + plats[8]+ "][" + plats[9] + "][ ][" + plats[10] + "][" + plats[11] + "]\n[" + plats[12] + "]["+ plats[13] + "][ ][" + plats[14] + "][" + plats[15] + "]\n[" + plats[16] + "][" + plats[17]+ "][ ][" + plats[18] + "][" + plats[19] + "]");
                 int valPlats = tangentbord.nextInt();
                 valPlats -= 1;
@@ -40,8 +40,9 @@ public class App {
                     valPlats = tangentbord.nextInt();
                     valPlats -= 1;
                 }                                                        // Om man väljer en upptagen plats ska man välja igen
+                laddar();
 
-                System.out.println("Välj:\n1. Ange namn\n2. Ange personnummer");
+                System.out.println("Vill du ange namn eller personnummer?\n1. Ange namn\n2. Ange personnummer");
                 int val1 = tangentbord.nextInt();
 
                 if (val1 == 1) {
@@ -50,7 +51,8 @@ public class App {
                     String enter = tangentbord.nextLine();
                     String namn = tangentbord.nextLine();
                     namnPerson[valPlats] = namn;
-                    plats[valPlats] = "X";
+
+                    laddar();
 
                     System.out.println("Skriv in din ålder:");
                     age[valPlats] = tangentbord.nextInt();
@@ -59,7 +61,39 @@ public class App {
                     } else if (age[valPlats] >= 18) { // Vuxenpriser
                         summa += 299.90;
                     }
+                plats[valPlats] = "X";
+                
+                }else if(val1 == 2){
+                    laddar();
+                    System.out.println("Skriv in ditt personnummer (YYYYMMDD):");
+                    String enter = tangentbord.nextLine();
+                    int personnummer= tangentbord.nextInt();
+                    if((personnummer-18799999)<=0){ //Född innan 1880-talet
+                        System.out.println("Felaktigt personnummer.");
+                        return;
+                    }
+                    personnummerPerson[valPlats] = personnummer;
+
+                    laddar(); 
+
+                    System.out.println("Skriv in din ålder:");
+                    age[valPlats] = tangentbord.nextInt();
+
+                    double test1 = personnummerPerson[valPlats];
+                    if(((int)(20240000-test1)/10000)==age[valPlats] || (((int)(20240000-test1)/10000)+1)==age[valPlats]){
+                        if (age[valPlats] < 18) { // Barn priser
+                            summa += 149.90;
+                        } else if (age[valPlats] >= 18) { // Vuxenpriser
+                            summa += 299.90;
+                        }
+                    plats[valPlats] = "X";
+                    personnummerPerson[valPlats] = personnummer;
+                    }else{
+                        System.out.println("Åldern stämmer inte överräns med personnummret");
+                    }
+                    
                 }
+
 
             } else if (svar == 2) {
                 System.out.println("Vilken plats vill du avboka?");
@@ -73,14 +107,26 @@ public class App {
                     avbokaVal = tangentbord.nextInt();
                     avbokaVal -= 1;
                 }  
+
+                if(namnPerson[avbokaVal]!=null){
                 System.out.println("Vad heter du?");
                 String enter = tangentbord.nextLine();
                 String svarNamn = tangentbord.nextLine();
                 if(svarNamn.equals(namnPerson[avbokaVal])){
                     plats[avbokaVal] = avbokaVal+1 + "";
                 }else{
-                    System.out.println("Fel namn, försök igen");
+                    System.out.println("Fel namn, försök igen:");
                 }
+            }else if(personnummerPerson[avbokaVal]!=0){
+                System.out.println("Vad är ditt personnummer?");
+                String enter = tangentbord.nextLine();
+                int svarPersonnummer = tangentbord.nextInt();
+                if(svarPersonnummer==personnummerPerson[avbokaVal]){
+                    plats[avbokaVal] = avbokaVal+1 + "";
+                }else{
+                    System.out.println("Fel personnummer, försök igen:");
+                }
+            }
 
             } else if (svar == 3) {
                 laddar();
