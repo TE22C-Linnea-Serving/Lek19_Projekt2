@@ -31,6 +31,11 @@ public class App {
                 laddar();
                 System.out.println("Välj vilken plats du vill boka:");
                 System.out.println("[ " + plats[0] + "][" + plats[1] + " ][ ][ " + plats[2] + "][" + plats[3] + " ]\n[ "+ plats[4] + "][" + plats[5] + " ][ ][ " + plats[6] + "][" + plats[7] + " ]\n[ " + plats[8]+ "][" + plats[9] + "][ ][" + plats[10] + "][" + plats[11] + "]\n[" + plats[12] + "]["+ plats[13] + "][ ][" + plats[14] + "][" + plats[15] + "]\n[" + plats[16] + "][" + plats[17]+ "][ ][" + plats[18] + "][" + plats[19] + "]");
+                if(!tangentbord.hasNextInt()){
+                    System.out.println("Du skrev in ett ogiltigt svar");
+                    break;
+                }else{
+                    
                 int valPlats = tangentbord.nextInt();
                 valPlats -= 1;
 
@@ -40,6 +45,7 @@ public class App {
                     valPlats = tangentbord.nextInt();
                     valPlats -= 1;
                 }                                                        // Om man väljer en upptagen plats ska man välja igen
+                
                 laddar();
 
                 System.out.println("Vill du ange namn eller personnummer?\n1. Ange namn\n2. Ange personnummer");
@@ -62,6 +68,8 @@ public class App {
                         summa += 299.90;
                     }
                 plats[valPlats] = "X";
+                laddar();
+                System.out.println("Din plats är nu bokad.");
                 
                 }else if(val1 == 2){
                     laddar();
@@ -88,12 +96,15 @@ public class App {
                         }
                     plats[valPlats] = "X";
                     personnummerPerson[valPlats] = personnummer;
+                    laddar();
+                    System.out.println("Din plats är nu bokad.");
                     }else{
                         System.out.println("Åldern stämmer inte överräns med personnummret");
                     }
                     
                 }
 
+            }
 
             } else if (svar == 2) {
                 System.out.println("Vilken plats vill du avboka?");
@@ -115,7 +126,7 @@ public class App {
                 if(svarNamn.equals(namnPerson[avbokaVal])){
                     plats[avbokaVal] = avbokaVal+1 + "";
                 }else{
-                    System.out.println("Fel namn, försök igen:");
+                    System.out.println("Ogiltigt namn, försök igen:");
                 }
             }else if(personnummerPerson[avbokaVal]!=0){
                 System.out.println("Vad är ditt personnummer?");
@@ -123,8 +134,15 @@ public class App {
                 int svarPersonnummer = tangentbord.nextInt();
                 if(svarPersonnummer==personnummerPerson[avbokaVal]){
                     plats[avbokaVal] = avbokaVal+1 + "";
+
+                    if(age[avbokaVal]<18){
+                        summa-=149.90;
+                    }else if(age[avbokaVal]>=18){
+                        summa-=299.90;
+                    }
+
                 }else{
-                    System.out.println("Fel personnummer, försök igen:");
+                    System.out.println("Ogiltigt personnummer, försök igen:");
                 }
             }
 
@@ -137,8 +155,16 @@ public class App {
                         + plats[13] + "][ ][" + plats[14] + "][" + plats[15] + "]\n[" + plats[16] + "][" + plats[17]
                         + "][ ][" + plats[18] + "][" + plats[19] + "]");
 
-                System.out.println("Det finns " + plats.length + "platser");
-                // Gå igenom alla och se vilka som är "null", och skriv ut det.
+                        int antalLedigt = 0;
+                        for(int i=0; i<plats.length; i++){
+                            if(plats[i]!="X"){
+                            antalLedigt++;
+                            }
+                        }
+
+                        System.out.println("Det finns " + antalLedigt + " lediga platser");
+
+                        
 
             } else if (svar == 4) {
                 laddar();
