@@ -11,6 +11,10 @@ import java.util.Scanner;
 
 public class App {
 
+
+    /*
+     * Metoden "laddar" lägger till en väntetid med texten "Laddar...".
+     */
     public static void laddar() throws InterruptedException {
         System.out.println("");
         System.out.print("Laddar");
@@ -22,6 +26,9 @@ public class App {
         System.out.println("\n");
     }
 
+    /*
+     * Metoden "bild" skriver ut bilden av bussen.
+     */
     public static void bild(String[] plats) {
         System.out.println("[ " + plats[0] + "][" + plats[1] + " ][ ][ " + plats[2] + "][" + plats[3] + " ]\n[ "
                 + plats[4] + "][" + plats[5] + " ][ ][ " + plats[6] + "][" + plats[7] + " ]\n[ " + plats[8] + "]["
@@ -30,6 +37,9 @@ public class App {
                 + plats[19] + "]");
     }
 
+    /*
+     * Metoden "reset" gör om alla värden till standardvärden efter avbokning
+     */
     public static void reset(String[] plats, int avbokaVal, String[] fornamnPerson, String[] efternamnPerson, int[] personnummerPerson, int[] alder){
         plats[avbokaVal] = avbokaVal + 1 + "";
         fornamnPerson[avbokaVal] = null;
@@ -137,7 +147,8 @@ public class App {
 
                         System.out.println("Skriv in ditt personnummer (YYYYMMDD):");
                         personnummerPerson[valPlats] = tangentbord.nextInt();
-                        if ((personnummerPerson[valPlats] - 18799999) <= 0) { // Född innan 1880-talet
+                        //Om användaren var född innan 1880-talet (över 140 år)
+                        if ((personnummerPerson[valPlats] - 18799999) <= 0) {
                             System.out.println("Felaktigt personnummer. Avslutar program...");
                             return;
                         }
